@@ -3,1227 +3,1267 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CJONS Bedrock 과정 — 사전 환경 자가 점검 가이드</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>CJ ONS Bedrock 교육 - 사전 환경 테스트 안내</title>
 <style>
   :root {
-    --bg: #f5f1ea;
-    --bg-soft: #ebe5da;
-    --bg-paper: #fafaf5;
-    --ink: #1a1814;
-    --ink-soft: #4a463e;
-    --ink-mute: #7a7468;
-    --accent: #c8451f;
-    --accent-soft: #e8835f;
-    --line: #2a2620;
-    --line-soft: #d4ccc0;
-    --code-bg: #1c1915;
-    --code-ink: #e8e2d4;
-    --code-accent: #f5a26b;
-    --code-string: #a8c47a;
-    --code-mute: #6e6a5e;
-    --ok: #5a7a3a;
-    --warn: #b8801f;
-    --err: #a8351f;
-    --gate: #8b2a18;
+    --primary: #FF9900;
+    --primary-dark: #E68A00;
+    --secondary: #232F3E;
+    --bg: #FAFBFC;
+    --card: #FFFFFF;
+    --border: #E5E7EB;
+    --text: #1F2937;
+    --text-sub: #6B7280;
+    --success: #10B981;
+    --warning: #F59E0B;
+    --error: #EF4444;
+    --info: #3B82F6;
+    --code-bg: #1E293B;
+    --code-text: #E2E8F0;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-
   body {
-    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Segoe UI', system-ui, sans-serif;
     background: var(--bg);
-    color: var(--ink);
+    color: var(--text);
     line-height: 1.7;
-    font-weight: 400;
     font-size: 16px;
-    background-image:
-      radial-gradient(circle at 20% 10%, rgba(200, 69, 31, 0.04) 0%, transparent 40%),
-      radial-gradient(circle at 80% 90%, rgba(26, 24, 20, 0.04) 0%, transparent 50%);
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, #232F3E 0%, #37475A 100%);
+    color: white;
+    padding: 56px 20px 48px;
+    text-align: center;
+    border-bottom: 4px solid var(--primary);
+  }
+  header .badge {
+    display: inline-block;
+    background: rgba(255, 153, 0, 0.2);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+  header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+  }
+  header .subtitle {
+    color: #CBD5E1;
+    font-size: 15px;
+  }
+  header .meta {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  header .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #E2E8F0;
+  }
+  header .meta-item .icon {
+    width: 18px; height: 18px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: white;
+    font-weight: bold;
   }
 
-  /* ── Container ───────────────────────────── */
-  .container {
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 0 32px;
-    position: relative;
+  /* Intro */
+  .intro {
+    background: white;
+    margin-top: -24px;
+    padding: 28px 32px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+  .intro h2 {
+    font-size: 19px;
+    color: var(--secondary);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .intro p { color: var(--text-sub); margin-bottom: 8px; }
+  .intro .highlight {
+    background: linear-gradient(180deg, transparent 60%, #FFF3D6 60%);
+    color: var(--text);
+    font-weight: 600;
   }
 
-  /* ── Hero ────────────────────────────────── */
-  .hero {
-    border-bottom: 1px solid var(--line);
-    padding: 72px 0 56px;
+  /* Section */
+  section { margin: 40px 0; }
+  section h2.section-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  section h2.section-title .num {
+    background: var(--primary);
+    color: white;
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  section .section-desc {
+    color: var(--text-sub);
+    margin-bottom: 20px;
+    padding-left: 42px;
+    font-size: 14px;
+  }
+
+  /* Step card */
+  .step {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    transition: all 0.2s;
     position: relative;
     overflow: hidden;
   }
-
-  .hero::before {
-    content: "";
+  .step::before {
+    content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-image:
-      linear-gradient(var(--line-soft) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
-    background-size: 60px 60px;
-    opacity: 0.25;
-    pointer-events: none;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--primary);
+    opacity: 0.6;
+  }
+  .step.done { background: #F0FDF4; border-color: #BBF7D0; }
+  .step.done::before { background: var(--success); opacity: 1; }
+  .step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    gap: 12px;
+  }
+  .step h3 {
+    font-size: 17px;
+    color: var(--secondary);
+    font-weight: 700;
+  }
+  .step .estimate {
+    font-size: 12px;
+    color: var(--text-sub);
+    background: #F3F4F6;
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+  .step .description {
+    color: var(--text-sub);
+    font-size: 14.5px;
+    margin-bottom: 16px;
+  }
+  .step ol, .step ul {
+    margin-left: 22px;
+    color: var(--text);
+    font-size: 14.5px;
+  }
+  .step ol li, .step ul li { margin-bottom: 8px; }
+  .step .success-criteria {
+    background: #F0F9FF;
+    border-left: 3px solid var(--info);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+  .step .success-criteria strong { color: var(--info); }
+
+  /* Action button */
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary);
+    color: white;
+    padding: 9px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 8px 8px 8px 0;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+  .action-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  .action-btn.secondary {
+    background: white;
+    color: var(--secondary);
+    border: 1px solid var(--border);
+  }
+  .action-btn.secondary:hover { background: #F9FAFB; }
+
+  /* Check button */
+  .check-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .check-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .check-btn:hover { border-color: var(--primary); }
+  .check-btn.success { color: var(--success); }
+  .check-btn.fail { color: var(--error); }
+  .check-btn.active.success { background: var(--success); color: white; border-color: var(--success); }
+  .check-btn.active.fail { background: var(--error); color: white; border-color: var(--error); }
+
+  /* Code block */
+  .code-block {
+    position: relative;
+    background: var(--code-bg);
+    color: var(--code-text);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 14px 0;
+    font-family: 'JetBrains Mono', Consolas, Menlo, monospace;
+    font-size: 13.5px;
+    overflow-x: auto;
+    line-height: 1.6;
+  }
+  .code-block pre { margin: 0; white-space: pre-wrap; word-break: break-all; }
+  .copy-btn {
+    position: absolute;
+    top: 8px; right: 8px;
+    background: rgba(255,255,255,0.12);
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover { background: rgba(255,255,255,0.22); }
+  .copy-btn.copied { background: var(--success); }
+
+  /* Alert */
+  .alert {
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin: 16px 0;
+    border-left: 4px solid;
+    font-size: 14.5px;
+  }
+  .alert-warning { background: #FFFBEB; border-color: var(--warning); color: #92400E; }
+  .alert-info { background: #EFF6FF; border-color: var(--info); color: #1E3A8A; }
+  .alert-tip { background: #F0FDF4; border-color: var(--success); color: #14532D; }
+  .alert strong { font-weight: 700; display: block; margin-bottom: 4px; }
+
+  /* Network table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  table th, table td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  table th {
+    background: #F9FAFB;
+    font-weight: 600;
+    color: var(--text-sub);
+    font-size: 13px;
+  }
+  table td code {
+    background: #F3F4F6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #BE185D;
   }
 
-  .meta-row {
+  /* FAQ */
+  .faq-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .faq-question {
+    padding: 14px 18px;
+    cursor: pointer;
+    font-weight: 600;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 28px;
+    font-size: 14.5px;
+    color: var(--secondary);
+    transition: background 0.15s;
+  }
+  .faq-question:hover { background: #F9FAFB; }
+  .faq-question::after {
+    content: '+';
+    font-size: 22px;
+    color: var(--primary);
+    font-weight: 300;
+    transition: transform 0.2s;
+  }
+  .faq-item.open .faq-question::after { content: '−'; }
+  .faq-answer {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.25s ease;
+    color: var(--text-sub);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .faq-item.open .faq-answer { padding: 4px 18px 16px; max-height: 600px; }
+  .faq-answer code {
+    background: #F3F4F6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #BE185D;
   }
 
-  .client-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    padding: 6px 14px;
-    background: var(--bg);
-    text-transform: uppercase;
+  /* Progress */
+  .progress-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+  }
+  .progress-card h3 {
+    font-size: 15px;
+    color: var(--secondary);
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .progress-card h3 span { color: var(--primary); font-weight: 700; }
+  .progress-bar {
+    height: 8px;
+    background: #F3F4F6;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), #FFB84D);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.4s ease;
   }
 
-  .date-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    color: var(--ink-mute);
-    text-transform: uppercase;
+  /* Footer */
+  footer {
+    background: var(--secondary);
+    color: #94A3B8;
+    text-align: center;
+    padding: 32px 20px;
+    margin-top: 60px;
+    font-size: 13px;
   }
+  footer strong { color: white; }
 
-  .date-tag strong {
-    color: var(--ink);
-    font-weight: 500;
+  /* Chatbot */
+  .chat-fab {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    width: 60px; height: 60px;
+    background: linear-gradient(135deg, var(--primary), #FFB84D);
+    border-radius: 50%;
+    box-shadow: 0 8px 24px rgba(255,153,0,0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 999;
+    border: none;
   }
-
-  h1 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: clamp(34px, 5vw, 60px);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
-    font-variation-settings: "opsz" 144;
-  }
-
-  h1 .italic {
-    font-style: italic;
-    font-weight: 400;
-    color: var(--accent);
-  }
-
-  .subtitle {
-    font-size: 18px;
-    color: var(--ink-soft);
-    max-width: 680px;
-    margin-bottom: 36px;
-    line-height: 1.6;
-  }
-
-  /* ── Gate Notice ──────────────────────────── */
-  .gate-notice {
-    background: var(--ink);
-    color: var(--bg);
-    padding: 32px 36px;
-    margin-top: 24px;
-    position: relative;
-    border-left: 6px solid var(--accent);
-  }
-
-  .gate-notice::before {
-    content: "i";
+  .chat-fab:hover { transform: scale(1.08); }
+  .chat-fab::after {
+    content: '';
     position: absolute;
-    top: -14px;
-    right: 28px;
-    background: var(--accent);
-    color: var(--bg);
-    width: 38px;
-    height: 38px;
+    top: 4px; right: 4px;
+    width: 10px; height: 10px;
+    background: #EF4444;
+    border-radius: 50%;
+    border: 2px solid white;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+  }
+  .chat-fab svg { width: 28px; height: 28px; fill: white; }
+
+  .chat-window {
+    position: fixed;
+    bottom: 100px; right: 24px;
+    width: 380px;
+    max-width: calc(100vw - 32px);
+    height: 560px;
+    max-height: calc(100vh - 140px);
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    display: none;
+    flex-direction: column;
+    z-index: 998;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .chat-window.open { display: flex; animation: slideUp 0.25s ease; }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .chat-header {
+    background: linear-gradient(135deg, var(--secondary), #37475A);
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .chat-header .info { display: flex; align-items: center; gap: 10px; }
+  .chat-header .avatar {
+    width: 36px; height: 36px;
+    background: var(--primary);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 20px;
-    font-style: italic;
-  }
-
-  .gate-notice .label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--accent-soft);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-  }
-
-  .gate-notice h3 {
-    font-family: 'Fraunces', serif;
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 14px;
-    color: var(--bg);
-    line-height: 1.3;
-  }
-
-  .gate-notice p {
-    color: rgba(245, 241, 234, 0.85);
-    font-size: 15px;
-    line-height: 1.65;
-    margin: 0;
-  }
-
-  .gate-notice strong {
-    color: var(--accent-soft);
-    font-weight: 600;
-  }
-
-  /* ── Section ───────────────────────────────── */
-  section {
-    padding: 72px 0;
-    border-bottom: 1px solid var(--line-soft);
-  }
-
-  .section-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    margin-bottom: 12px;
-  }
-
-  h2 {
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-size: clamp(28px, 3.5vw, 40px);
-    line-height: 1.15;
-    letter-spacing: -0.015em;
-    margin-bottom: 16px;
-    font-variation-settings: "opsz" 96;
-  }
-
-  h2 .italic {
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 400;
-  }
-
-  .section-lead {
-    color: var(--ink-soft);
+    font-weight: 700;
     font-size: 16px;
-    max-width: 720px;
-    margin-bottom: 36px;
   }
-
-  h3 {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 22px;
-    margin: 36px 0 14px;
-    letter-spacing: -0.01em;
+  .chat-header .title { font-size: 14.5px; font-weight: 700; }
+  .chat-header .status { font-size: 11.5px; color: #94A3B8; display: flex; align-items: center; gap: 5px; }
+  .chat-header .status::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: #10B981;
+    border-radius: 50%;
   }
-
-  h4 {
-    font-family: 'IBM Plex Sans KR', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    margin: 22px 0 12px;
-    color: var(--ink-soft);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+  .chat-close {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    cursor: pointer;
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    font-size: 18px;
   }
+  .chat-close:hover { background: rgba(255,255,255,0.2); }
 
-  p { margin-bottom: 14px; color: var(--ink-soft); }
-  p strong { color: var(--ink); font-weight: 600; }
-
-  /* ── Info card ──────────────────────────── */
-  .info-card {
-    background: var(--bg-paper);
-    border: 1px solid var(--line-soft);
-    padding: 24px 28px;
-    margin: 20px 0;
-  }
-
-  .info-card h4 {
-    color: var(--accent);
-    margin-top: 0;
-  }
-
-  .info-card p:last-child { margin-bottom: 0; }
-
-  /* ── Before You Start Grid ─────────────── */
-  .pre-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-    margin: 24px 0;
-  }
-
-  .pre-card {
-    background: var(--bg-paper);
-    border: 1px solid var(--line-soft);
-    padding: 22px;
-  }
-
-  .pre-card .num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    margin-bottom: 8px;
-  }
-
-  .pre-card h4 {
-    font-family: 'Fraunces', serif;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--ink);
-    margin: 0 0 8px;
-    text-transform: none;
-    letter-spacing: -0.005em;
-  }
-
-  .pre-card p {
-    font-size: 13.5px;
-    margin: 0;
-    line-height: 1.55;
-  }
-
-  /* ── Step Cards ────────────────────────── */
-  .step-card {
-    background: var(--bg-paper);
-    border: 1px solid var(--line);
-    margin-bottom: 28px;
-    position: relative;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .step-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 6px 6px 0 var(--ink);
-  }
-
-  .step-header {
-    display: flex;
-    align-items: stretch;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .step-number {
-    background: var(--ink);
-    color: var(--bg);
-    font-family: 'Fraunces', serif;
-    font-size: 32px;
-    font-weight: 500;
-    padding: 18px 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 84px;
-    font-style: italic;
-  }
-
-  .step-title {
-    padding: 18px 26px;
+  .chat-messages {
     flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    background: #F9FAFB;
+  }
+  .chat-msg {
+    margin-bottom: 12px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    max-width: 85%;
+    animation: msgIn 0.2s ease;
   }
-
-  .step-title h3 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: 600;
-  }
-
-  .step-success {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--ok);
-    margin-top: 6px;
-    letter-spacing: 0.02em;
-  }
-
-  .step-success::before {
-    content: "→ 성공: ";
-    color: var(--ink-mute);
-  }
-
-  .step-body { padding: 26px; }
-  .step-body > p:first-child { margin-top: 0; }
-  .step-body > *:last-child { margin-bottom: 0; }
-
-  /* ── Code blocks ────────────────────────── */
-  pre {
-    background: var(--code-bg);
-    color: var(--code-ink);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
-    line-height: 1.65;
-    padding: 20px 24px;
-    margin: 14px 0;
-    overflow-x: auto;
-    border-left: 3px solid var(--accent);
-    position: relative;
-  }
-
-  pre::before {
-    content: attr(data-lang);
-    position: absolute;
-    top: 8px;
-    right: 16px;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--code-mute);
-    text-transform: uppercase;
-  }
-
-  code {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.86em;
-    background: var(--bg-soft);
-    padding: 2px 6px;
-    border-radius: 2px;
-    color: var(--ink);
-    border: 1px solid var(--line-soft);
-  }
-
-  pre code {
-    background: none;
-    padding: 0;
-    border: none;
-    color: inherit;
-    font-size: inherit;
-  }
-
-  .tk-key { color: #d4a3e8; }
-  .tk-str { color: var(--code-string); }
-  .tk-fn  { color: var(--code-accent); }
-  .tk-com { color: var(--code-mute); font-style: italic; }
-  .tk-num { color: #e8c47a; }
-
-  /* ── Check Points ─────────────────────── */
-  .checkpoint {
-    background: var(--bg-soft);
-    border-left: 3px solid var(--warn);
-    padding: 14px 18px;
-    margin: 18px 0;
+  @keyframes msgIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+  .chat-msg.bot { align-self: flex-start; }
+  .chat-msg.user { align-self: flex-end; align-items: flex-end; margin-left: auto; }
+  .chat-bubble {
+    padding: 10px 14px;
+    border-radius: 14px;
     font-size: 14px;
+    line-height: 1.55;
+    word-wrap: break-word;
   }
-
-  .checkpoint-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--warn);
-    margin-bottom: 6px;
-    font-weight: 600;
+  .chat-msg.bot .chat-bubble {
+    background: white;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
   }
-
-  .checkpoint p { margin-bottom: 6px; color: var(--ink); }
-  .checkpoint p:last-child { margin-bottom: 0; }
-  .checkpoint ul { margin: 6px 0 0 20px; color: var(--ink); }
-  .checkpoint li { margin-bottom: 4px; }
-
-  .checkpoint.success { border-left-color: var(--ok); }
-  .checkpoint.success .checkpoint-label { color: var(--ok); }
-
-  .checkpoint.danger { border-left-color: var(--err); background: #f5e8e3; }
-  .checkpoint.danger .checkpoint-label { color: var(--err); }
-
-  /* ── Tables ───────────────────────────── */
-  .table-wrap {
-    overflow-x: auto;
-    margin: 20px 0;
-    border: 1px solid var(--line);
+  .chat-msg.user .chat-bubble {
+    background: var(--primary);
+    color: white;
+    border-bottom-right-radius: 4px;
   }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    background: var(--bg-paper);
+  .chat-bubble code {
+    background: rgba(0,0,0,0.08);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 12.5px;
   }
+  .chat-msg.user .chat-bubble code { background: rgba(255,255,255,0.2); }
+  .chat-bubble strong { font-weight: 700; }
+  .chat-bubble a { color: var(--primary); text-decoration: underline; }
+  .chat-msg.user .chat-bubble a { color: white; }
 
-  th {
-    background: var(--ink);
-    color: var(--bg);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 12px 16px;
-    text-align: left;
-    font-weight: 500;
-  }
-
-  td {
-    padding: 12px 16px;
-    border-top: 1px solid var(--line-soft);
-    vertical-align: top;
-  }
-
-  tr:hover td { background: var(--bg-soft); }
-
-  td:first-child {
-    font-weight: 500;
-    color: var(--ink);
-  }
-
-  td code {
-    font-size: 11.5px;
-    background: var(--code-bg);
-    color: var(--code-ink);
-    border: none;
-  }
-
-  /* ── Lists ────────────────────────────── */
-  ul, ol { margin: 0 0 14px 24px; color: var(--ink-soft); }
-  li { margin-bottom: 6px; }
-  li::marker { color: var(--accent); }
-
-  /* ── Checkbox List ────────────────────── */
-  .checklist {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .checklist li {
-    padding: 14px 16px;
-    border: 1px solid var(--line-soft);
-    background: var(--bg-paper);
-    margin-bottom: 8px;
+  .quick-replies {
     display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    transition: background 0.15s, border-color 0.15s;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .quick-reply {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 14px;
+    font-size: 12.5px;
     cursor: pointer;
+    color: var(--secondary);
+    font-weight: 500;
+    transition: all 0.15s;
   }
+  .quick-reply:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
-  .checklist li:hover { border-color: var(--accent); }
-
-  .checklist li.checked {
-    background: var(--bg-soft);
-    border-color: var(--ok);
-    text-decoration: line-through;
-    color: var(--ink-mute);
+  .chat-input {
+    border-top: 1px solid var(--border);
+    padding: 12px;
+    background: white;
+    display: flex;
+    gap: 8px;
   }
-
-  .checklist .box {
-    width: 18px;
-    height: 18px;
-    border: 2px solid var(--ink);
-    flex-shrink: 0;
-    margin-top: 3px;
-    position: relative;
-    background: var(--bg);
+  .chat-input input {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 9px 16px;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
   }
-
-  .checklist li.checked .box {
-    background: var(--ok);
-    border-color: var(--ok);
-  }
-
-  .checklist li.checked .box::after {
-    content: "✓";
-    position: absolute;
-    inset: 0;
-    color: var(--bg);
+  .chat-input input:focus { border-color: var(--primary); }
+  .chat-input button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    font-weight: 700;
   }
+  .chat-input button:hover { background: var(--primary-dark); }
+  .chat-input button svg { width: 18px; height: 18px; fill: white; }
+  .chat-input button:disabled { background: #D1D5DB; cursor: not-allowed; }
 
-  .checklist .text {
-    flex: 1;
-    font-size: 14.5px;
-    color: var(--ink);
-    line-height: 1.5;
+  .typing { display: flex; gap: 4px; padding: 12px 16px; }
+  .typing span {
+    width: 7px; height: 7px;
+    background: #94A3B8;
+    border-radius: 50%;
+    animation: typing 1.2s infinite;
   }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing { 0%, 60%, 100% { opacity: 0.3; } 30% { opacity: 1; } }
 
-  .checklist .text small {
-    display: block;
-    color: var(--ink-mute);
-    font-size: 12.5px;
-    margin-top: 2px;
-  }
-
-  .checklist li.checked .text small { color: var(--ink-mute); }
-
-  /* ── Report Block ─────────────────────── */
-  .report-block {
-    background: var(--ink);
-    color: var(--bg);
-    padding: 32px 36px;
-    margin: 32px 0;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 13.5px;
-    line-height: 1.8;
-    overflow-x: auto;
-    white-space: pre-wrap;
-  }
-
-  .report-block .field {
-    color: var(--code-accent);
-  }
-
-  .report-block .placeholder {
-    color: var(--code-mute);
-    font-style: italic;
-  }
-
-  /* ── TOC ──────────────────────────────── */
-  .toc {
-    background: var(--bg-paper);
-    border: 1px solid var(--line);
-    padding: 28px 32px;
-  }
-
-  .toc-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-    margin-bottom: 18px;
-  }
-
-  .toc ol {
-    list-style: none;
-    margin: 0;
-    columns: 2;
-    column-gap: 28px;
-  }
-
-  .toc li {
-    margin-bottom: 9px;
-    font-size: 14px;
-    break-inside: avoid;
-  }
-
-  .toc a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s;
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-  }
-
-  .toc a:hover { border-color: var(--accent); color: var(--accent); }
-
-  .toc a .num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--ink-mute);
-    min-width: 24px;
-  }
-
-  /* ── Footer ──────────────────────────── */
-  footer {
-    padding: 60px 0 72px;
-    text-align: center;
-    background: var(--ink);
-    color: var(--bg);
-  }
-
-  footer .container { color: inherit; }
-
-  footer .ornament {
-    font-family: 'Fraunces', serif;
-    font-size: 36px;
-    color: var(--accent);
-    margin-bottom: 20px;
-    font-style: italic;
-  }
-
-  footer p {
-    color: rgba(245, 241, 234, 0.7);
-    font-size: 13.5px;
-    margin-bottom: 6px;
-  }
-
-  footer .sig {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    letter-spacing: 0.15em;
-    color: var(--bg);
-    text-transform: uppercase;
-    margin-top: 18px;
-  }
-
-  /* ── Responsive ──────────────────────── */
+  /* Responsive */
   @media (max-width: 640px) {
-    .container { padding: 0 20px; }
-    .hero { padding: 56px 0 40px; }
-    section { padding: 52px 0; }
-    .step-header { flex-direction: column; }
-    .step-number { min-width: auto; width: 100%; padding: 14px; font-size: 26px; }
-    .step-body { padding: 20px; }
-    .toc ol { columns: 1; }
-    .gate-notice { padding: 24px 22px; }
-    .report-block { padding: 22px 20px; font-size: 12px; }
+    header h1 { font-size: 24px; }
+    header { padding: 40px 16px 36px; }
+    .intro { padding: 20px; }
+    .step { padding: 18px 20px; }
+    .chat-window { right: 12px; left: 12px; width: auto; bottom: 90px; }
   }
-
-  /* ── Print ───────────────────────────── */
-  @media print {
-    body { background: white; font-size: 11pt; }
-    .hero::before { display: none; }
-    .step-card, .pre-card, .info-card { break-inside: avoid; box-shadow: none; }
-    pre { font-size: 9pt; break-inside: avoid; }
-    footer { background: white; color: black; }
-    footer p { color: #333; }
-    .gate-notice { background: white; color: black; border: 2px solid var(--err); }
-    .gate-notice h3, .gate-notice p, .gate-notice strong { color: black; }
-    .report-block { background: white; color: black; border: 1px solid black; }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero > .container > * { animation: fadeUp 0.7s ease backwards; }
-  .hero .subtitle { animation-delay: 0.1s; }
-  .hero .gate-notice { animation-delay: 0.2s; }
 </style>
 </head>
 <body>
 
-<!-- ═══════════ HERO ═══════════ -->
-<header class="hero">
-  <div class="container">
-    <div class="meta-row">
-      <div class="client-tag">CJONS · Bedrock Course</div>
-      <div class="date-tag">교육일 <strong>2026.05.19 (화)</strong></div>
-    </div>
-    <h1>사전 환경 <span class="italic">자가 점검</span><br>가이드</h1>
-    <p class="subtitle">
-      Google Colab + Amazon Bedrock 실습 환경이 본인 PC와 네트워크에서 정상 동작하는지 미리 확인하기 위한 문서입니다.
-      교육 당일 실습이 원활하게 진행될 수 있도록, 아래 9단계를 미리 함께 점검해 주세요.
-    </p>
-
-    <div class="gate-notice">
-      <div class="label">━━ 사전 안내 ━━</div>
-      <h3>교육 당일 원활한 실습 진행을 위해, 사전 점검 결과를 미리 공유해 주세요.</h3>
-      <p>
-        팀별로 네트워크·보안 정책이 다르기 때문에, 본인 환경에서 어떤 부분이 정상 동작하고 어떤 부분이 막히는지를 운영팀이 미리 파악해야
-        교육 당일 막힘 없이 실습을 진행할 수 있습니다. 9단계 중 막히는 부분이 있더라도 괜찮습니다 — <strong>교육일 3영업일 전(5월 14일)까지</strong>
-        운영 담당자에게 결과를 회신해 주시면, 운영팀에서 사전에 대응 방안을 함께 준비해 드립니다.
-        본 페이지 마지막의 <a href="#report" style="color: var(--accent-soft); text-decoration: underline;">"완료 보고 양식"</a>을 그대로 복사해서 보내시면 됩니다.
-      </p>
-    </div>
+<header>
+  <div class="badge">2026.05.19 교육 사전 안내</div>
+  <h1>CJ ONS Bedrock 교육<br>환경 사전 테스트 가이드</h1>
+  <p class="subtitle">교육 당일 매끄러운 실습을 위해, 미리 5가지 환경을 직접 확인해 주세요</p>
+  <div class="meta">
+    <div class="meta-item"><span class="icon">⏱</span> 소요시간 약 15–20분</div>
+    <div class="meta-item"><span class="icon">💻</span> 실행환경 Colab + AWS Bedrock</div>
+    <div class="meta-item"><span class="icon">📅</span> 교육일 2026년 5월 19일</div>
   </div>
 </header>
 
-<!-- ═══════════ TOC ═══════════ -->
-<section style="padding: 44px 0;">
-  <div class="container">
-    <div class="toc">
-      <div class="toc-label">── Contents ──</div>
+<div class="container">
+
+  <div class="intro">
+    <h2>🙌 안녕하세요, 교육 참여자 여러분!</h2>
+    <p>이번 Bedrock 교육은 <span class="highlight">Google Colab과 Amazon Bedrock</span>을 사용해서 진행됩니다. 그런데 <strong>회사마다 보안 정책이 달라서</strong>, 같은 사내에서도 어떤 분은 Colab이 열리고 어떤 분은 막히는 경우가 자주 있어요.</p>
+    <p style="margin-top: 10px;">교육 당일 "저만 안 돼요 😢" 상황이 생기지 않도록, <strong>각자 본인 PC에서 미리 5가지를 확인</strong>해 주세요. 막히는 부분이 있으면 <strong>오른쪽 아래 챗봇</strong>에게 물어보시면 됩니다.</p>
+  </div>
+
+  <div class="progress-card">
+    <h3>나의 진행률 <span id="progressText">0 / 5 완료</span></h3>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <!-- STEP 1 -->
+  <section>
+    <h2 class="section-title"><span class="num">1</span>Google Colab 접속 확인</h2>
+    <p class="section-desc">교육은 PC에 Python을 설치하지 않고, 브라우저에서 바로 코드를 실행하는 <strong>Google Colab</strong>으로 진행됩니다.</p>
+
+    <div class="step" id="step1">
+      <div class="step-header">
+        <h3>📔 새 노트북 만들고 코드 한 줄 실행해보기</h3>
+        <span class="estimate">⏱ 2분</span>
+      </div>
+      <p class="description">Colab에 접속해서 새 노트북을 만들고, 간단한 코드가 실행되는지 확인합니다.</p>
       <ol>
-        <li><a href="#overview"><span class="num">00</span><span>전체 개요와 소요 시간</span></a></li>
-        <li><a href="#before"><span class="num">01</span><span>시작 전 준비물</span></a></li>
-        <li><a href="#network"><span class="num">02</span><span>네트워크 허용 도메인</span></a></li>
-        <li><a href="#tests"><span class="num">03</span><span>9단계 자가 점검 테스트</span></a></li>
-        <li><a href="#troubleshoot"><span class="num">04</span><span>자주 발생하는 오류</span></a></li>
-        <li><a href="#security"><span class="num">05</span><span>보안 유의사항</span></a></li>
-        <li><a href="#report"><span class="num">06</span><span>완료 보고 양식</span></a></li>
+        <li>아래 버튼으로 Colab을 새 탭에서 열어주세요. (Google 계정 로그인 필요)</li>
+        <li>상단 메뉴 <strong>파일 → 새 노트</strong>를 클릭해서 빈 노트북을 생성합니다.</li>
+        <li>회색 코드 셀에 아래 코드를 입력하고, <strong>Shift + Enter</strong>로 실행해주세요.</li>
       </ol>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ OVERVIEW ═══════════ -->
-<section id="overview">
-  <div class="container">
-    <div class="section-num">00 — OVERVIEW</div>
-    <h2>전체 개요와 <span class="italic">소요 시간</span></h2>
-    <p class="section-lead">
-      본 사전 점검은 <strong>본인 PC + 본인 회사 네트워크 환경</strong>에서 진행해야 의미가 있습니다.
-      회사 외부(예: 집)에서는 잘 되는데 사무실에서 막히는 경우가 가장 흔한 사고 유형입니다.
-    </p>
-
-    <div class="pre-grid">
-      <div class="pre-card">
-        <div class="num">STEP A</div>
-        <h4>준비물 확인</h4>
-        <p>Google 계정 / AWS 임시 자격 증명 수령 / 가이드 숙지 — <strong>약 10분</strong></p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">복사</button>
+        <pre>print('ok')</pre>
       </div>
-      <div class="pre-card">
-        <div class="num">STEP B</div>
-        <h4>9단계 테스트</h4>
-        <p>Colab에서 셀 단위로 실행하며 결과 확인 — <strong>약 30분</strong></p>
+      <div class="success-criteria">
+        <strong>✅ 성공 기준</strong>
+        코드 셀 바로 아래에 <code>ok</code>가 출력되면 성공입니다.
       </div>
-      <div class="pre-card">
-        <div class="num">STEP C</div>
-        <h4>결과 보고</h4>
-        <p>완료 보고 양식을 채워 운영 담당자에게 회신 — <strong>약 5분</strong></p>
+      <a class="action-btn" href="https://colab.research.google.com" target="_blank">🚀 Colab 열기</a>
+      <a class="action-btn secondary" href="https://accounts.google.com" target="_blank">Google 로그인</a>
+      <div class="check-row">
+        <button class="check-btn success" onclick="markStep(1, true)">✓ 잘 됐어요</button>
+        <button class="check-btn fail" onclick="markStep(1, false)">✗ 막혔어요</button>
+      </div>
+      <div class="alert alert-warning" style="display:none;" id="step1-fail">
+        <strong>💡 막혔다면?</strong>
+        ① 사내 망에서 Colab(colab.research.google.com)이 차단됐을 수 있어요. → 오른쪽 아래 챗봇에 "Colab 접속 안 됨"이라고 물어보세요.<br>
+        ② 회사 계정으로 Google 로그인이 안 된다면, 개인 Gmail로 로그인 후 새 탭에서 Colab을 다시 열어보세요.
       </div>
     </div>
+  </section>
 
-    <div class="info-card">
-      <h4>실습 환경</h4>
-      <p>
-        본 교육은 <strong>Google Colab에서 Python 코드를 실행</strong>하고, Amazon Bedrock API로 Claude·Titan 등 생성형 AI 모델을 호출하는 방식으로 진행됩니다.
-        교육생 PC에는 별도 개발도구(VS Code, Docker, 로컬 Python)를 설치할 필요가 없습니다.
-      </p>
-    </div>
-  </div>
-</section>
+  <!-- STEP 2 -->
+  <section>
+    <h2 class="section-title"><span class="num">2</span>AWS Console 로그인 확인</h2>
+    <p class="section-desc">교육용으로 발급된 AWS 계정에 로그인할 수 있는지 확인합니다. <strong>본인 개인 AWS 계정이 아닌, 교육 담당자가 안내한 계정</strong>을 사용해 주세요.</p>
 
-<!-- ═══════════ BEFORE YOU START ═══════════ -->
-<section id="before">
-  <div class="container">
-    <div class="section-num">01 — BEFORE YOU START</div>
-    <h2>시작 전 <span class="italic">준비물</span></h2>
-    <p class="section-lead">아래 항목을 먼저 확인하고 9단계 테스트로 넘어가세요.</p>
-
-    <ul class="checklist" id="prep-checklist">
-      <li onclick="toggleCheck(this)">
-        <div class="box"></div>
-        <div class="text">
-          <strong>Google 계정 로그인 가능 여부</strong>
-          <small>Colab은 Google 계정으로 동작합니다. 회사 SSO 계정과 개인 계정 중 어느 것을 사용할지 운영 담당자 안내에 따라 통일해 주세요.</small>
-        </div>
-      </li>
-      <li onclick="toggleCheck(this)">
-        <div class="box"></div>
-        <div class="text">
-          <strong>AWS 임시 자격 증명 수령</strong>
-          <small>Access Key, Secret Key, Session Token(또는 AssumeRole 안내)을 운영팀으로부터 받으셨는지 확인. 받지 못했다면 먼저 요청해 주세요.</small>
-        </div>
-      </li>
-      <li onclick="toggleCheck(this)">
-        <div class="box"></div>
-        <div class="text">
-          <strong>사용 리전(Region) 확인</strong>
-          <small>운영팀이 지정한 리전(예: <code>us-east-1</code>)을 메모해 두세요. 리전이 다르면 모델 호출이 실패합니다.</small>
-        </div>
-      </li>
-      <li onclick="toggleCheck(this)">
-        <div class="box"></div>
-        <div class="text">
-          <strong>본인 회사 네트워크에서 진행</strong>
-          <small>교육 당일과 동일한 환경에서 테스트해야 합니다. 모바일 핫스팟이나 집 네트워크에서 통과해도 의미가 없습니다.</small>
-        </div>
-      </li>
-      <li onclick="toggleCheck(this)">
-        <div class="box"></div>
-        <div class="text">
-          <strong>약 45분의 여유 시간 확보</strong>
-          <small>중간에 끊기면 자격 증명 만료 등으로 처음부터 다시 해야 할 수 있습니다.</small>
-        </div>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- ═══════════ NETWORK ═══════════ -->
-<section id="network">
-  <div class="container">
-    <div class="section-num">02 — NETWORK</div>
-    <h2>네트워크 허용 <span class="italic">도메인</span></h2>
-    <p class="section-lead">
-      회사 방화벽·프록시에서 아래 도메인이 차단되어 있으면 실습 진행에 어려움이 생길 수 있습니다.
-      9단계 테스트 중 접속이 막히는 부분이 발견되면 이 표를 그대로 사내 IT/보안팀에 전달해 허용 요청해 주세요.
-    </p>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th style="width: 26%;">대상</th>
-            <th style="width: 38%;">URL / 도메인</th>
-            <th>용도</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Google Colab</td><td><code>colab.research.google.com</code></td><td>Python 노트북 실행 환경</td></tr>
-          <tr><td>Google Drive</td><td><code>drive.google.com</code></td><td>노트북·PDF 파일 저장</td></tr>
-          <tr><td>AWS Console</td><td><code>console.aws.amazon.com</code></td><td>AWS 로그인, Bedrock 콘솔 접근</td></tr>
-          <tr><td>Bedrock API</td><td><code>bedrock.&lt;region&gt;.amazonaws.com</code><br><code>bedrock-runtime.&lt;region&gt;.amazonaws.com</code></td><td>Colab에서 boto3로 모델 호출</td></tr>
-          <tr><td>AWS STS</td><td><code>sts.amazonaws.com</code></td><td>임시 자격 증명 검증</td></tr>
-          <tr><td>PyPI</td><td><code>pypi.org</code><br><code>files.pythonhosted.org</code></td><td>Python 패키지 설치</td></tr>
-          <tr><td>GitHub</td><td><code>github.com</code><br><code>raw.githubusercontent.com</code></td><td>예제 코드·노트북 다운로드</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ TESTS ═══════════ -->
-<section id="tests">
-  <div class="container">
-    <div class="section-num">03 — 9-STEP SELF-TEST</div>
-    <h2>9단계 <span class="italic">자가 점검 테스트</span></h2>
-    <p class="section-lead">
-      Colab의 코드 셀에 아래 코드를 순서대로 복사해 실행하세요. 각 단계의 <strong>"성공" 기준</strong>이 화면에 표시되면 다음 단계로 넘어갑니다.
-    </p>
-
-    <!-- STEP 1 -->
-    <div class="step-card">
+    <div class="step" id="step2">
       <div class="step-header">
-        <div class="step-number">01</div>
-        <div class="step-title">
-          <h3>Colab 접속 및 새 Notebook 생성</h3>
-          <div class="step-success">코드 셀에서 print('ok') 실행 결과 출력</div>
-        </div>
+        <h3>🔐 교육용 AWS 계정으로 로그인해보기</h3>
+        <span class="estimate">⏱ 3분</span>
       </div>
-      <div class="step-body">
-        <p><a href="https://colab.research.google.com" target="_blank" style="color: var(--accent);">colab.research.google.com</a> 접속 → 새 노트북 → 첫 셀에 아래 입력 후 <kbd>Shift+Enter</kbd>:</p>
-        <pre data-lang="python"><code><span class="tk-fn">print</span>(<span class="tk-str">'ok'</span>)</code></pre>
-        <div class="checkpoint danger">
-          <div class="checkpoint-label">⛔ 실패 시</div>
-          <p>회사 PC에서 Colab 자체가 차단되어 있을 수 있습니다. <strong>네트워크 허용 도메인 표</strong>를 사내 IT팀에 전달하고, 허용이 어렵다면 운영 담당자에게 즉시 회신해 주세요.</p>
-        </div>
+      <p class="description">AWS Console에 로그인하고, 교육에서 사용할 리전(Region)으로 전환할 수 있는지 확인합니다.</p>
+      <ol>
+        <li>아래 버튼으로 AWS Console을 열어주세요.</li>
+        <li>교육 담당자가 안내한 <strong>계정 ID, 사용자 이름, 비밀번호</strong>를 입력합니다. (SSO 안내가 있다면 SSO 방식으로)</li>
+        <li>MFA(2단계 인증) 코드를 요구하면 사내 가이드에 따라 입력해주세요.</li>
+        <li>로그인 성공 후, <strong>우측 상단의 리전 이름</strong>(예: 서울, N. Virginia)을 클릭해서 <strong>교육 담당자가 안내한 리전</strong>으로 변경합니다.</li>
+      </ol>
+      <div class="alert alert-info">
+        <strong>📍 리전이 뭔가요?</strong>
+        AWS 서비스가 운영되는 지역입니다. Bedrock은 리전마다 사용 가능한 AI 모델이 다르기 때문에, 교육에서 정한 리전을 꼭 맞춰주셔야 해요. 보통 "us-east-1 (버지니아 북부)" 또는 "us-west-2 (오리건)"을 사용합니다.
       </div>
-    </div>
-
-    <!-- STEP 2 -->
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-number">02</div>
-        <div class="step-title">
-          <h3>필수 패키지 설치</h3>
-          <div class="step-success">설치 로그에 빨간 ERROR 없이 완료</div>
-        </div>
+      <div class="success-criteria">
+        <strong>✅ 성공 기준</strong>
+        로그인이 되고, 우측 상단에서 리전을 변경할 수 있으면 성공입니다.
       </div>
-      <div class="step-body">
-        <pre data-lang="bash"><code>!pip install -q boto3 botocore langchain langchain-aws \
-              pypdf faiss-cpu streamlit python-dotenv</code></pre>
-        <div class="checkpoint">
-          <div class="checkpoint-label">⚠ 참고</div>
-          <p>Colab은 일부 패키지가 이미 깔려 있어 노란 <em>경고</em>(WARNING)가 뜰 수 있지만 무시해도 됩니다. 빨간 <strong>ERROR</strong>만 문제입니다. <code>pip install</code>이 무한 대기 상태라면 사내 PyPI 차단을 의심하세요.</p>
-        </div>
+      <a class="action-btn" href="https://console.aws.amazon.com" target="_blank">🚀 AWS Console 열기</a>
+      <div class="check-row">
+        <button class="check-btn success" onclick="markStep(2, true)">✓ 잘 됐어요</button>
+        <button class="check-btn fail" onclick="markStep(2, false)">✗ 막혔어요</button>
+      </div>
+      <div class="alert alert-warning" style="display:none;" id="step2-fail">
+        <strong>💡 막혔다면?</strong>
+        ① 로그인이 안 되면 계정 정보를 한 글자씩 확인해 보세요. (특히 계정 ID는 12자리 숫자입니다)<br>
+        ② MFA가 안 되면 사내 IT 담당자에게 MFA 디바이스 등록 상태를 확인해 주세요.<br>
+        ③ console.aws.amazon.com 자체가 차단됐다면, IT 담당자에게 "방화벽 화이트리스트" 요청이 필요합니다.
       </div>
     </div>
+  </section>
 
-    <!-- STEP 3 -->
-    <div class="step-card">
+  <!-- STEP 3 -->
+  <section>
+    <h2 class="section-title"><span class="num">3</span>Bedrock 모델 액세스 확인</h2>
+    <p class="section-desc">Amazon Bedrock 콘솔에 들어가서, 교육에서 사용할 <strong>AI 모델들이 "사용 승인(Available)" 상태</strong>인지 확인합니다.</p>
+
+    <div class="step" id="step3">
       <div class="step-header">
-        <div class="step-number">03</div>
-        <div class="step-title">
-          <h3>AWS 자격 증명 설정</h3>
-          <div class="step-success">get_caller_identity()에서 Account ID 출력</div>
-        </div>
+        <h3>🤖 Claude, Titan 모델이 사용 가능한지 확인</h3>
+        <span class="estimate">⏱ 3분</span>
       </div>
-      <div class="step-body">
-        <p>운영팀에서 전달받은 키를 아래 형식으로 입력합니다. <strong>노트북을 공유하거나 저장할 때 이 셀의 출력은 반드시 지워주세요.</strong></p>
-        <pre data-lang="python"><code><span class="tk-key">import</span> os
-os.environ[<span class="tk-str">'AWS_ACCESS_KEY_ID'</span>]     = <span class="tk-str">'전달받은 키 입력'</span>
-os.environ[<span class="tk-str">'AWS_SECRET_ACCESS_KEY'</span>] = <span class="tk-str">'전달받은 시크릿 입력'</span>
-os.environ[<span class="tk-str">'AWS_SESSION_TOKEN'</span>]    = <span class="tk-str">'전달받은 토큰 입력'</span>   <span class="tk-com"># 임시 자격 증명인 경우만</span>
-os.environ[<span class="tk-str">'AWS_DEFAULT_REGION'</span>]    = <span class="tk-str">'us-east-1'</span>          <span class="tk-com"># 운영팀 지정 리전</span>
-
-<span class="tk-key">import</span> boto3
-sts = boto3.<span class="tk-fn">client</span>(<span class="tk-str">'sts'</span>)
-<span class="tk-fn">print</span>(sts.<span class="tk-fn">get_caller_identity</span>())</code></pre>
-        <div class="checkpoint danger">
-          <div class="checkpoint-label">⛔ 자주 발생하는 오류</div>
-          <ul>
-            <li><code>InvalidClientTokenId</code> → 키 복사 시 공백·줄바꿈 섞임. 다시 복사.</li>
-            <li><code>ExpiredToken</code> → 임시 키가 이미 만료. 운영팀에 재발급 요청.</li>
+      <p class="description">Bedrock에서는 AI 모델을 사용하기 전에 "Model access(모델 액세스)" 승인을 받아야 합니다. 미리 승인되어 있는지 확인합니다.</p>
+      <ol>
+        <li>AWS Console에 로그인된 상태에서, 아래 버튼으로 Bedrock 콘솔을 열어주세요.</li>
+        <li>왼쪽 사이드바에서 <strong>"Model access"</strong>를 클릭합니다. (좀 아래쪽에 있어요)</li>
+        <li>모델 목록에서 다음 두 가지 항목이 <strong>"Access granted" 또는 "Available"</strong>로 표시되는지 확인합니다.
+          <ul style="margin-top:6px;">
+            <li><strong>Anthropic Claude</strong> 계열 (Claude 3 Sonnet, Claude 3 Haiku 등 어떤 것이든)</li>
+            <li><strong>Amazon Titan Embeddings</strong> (Titan Text Embeddings V2 등)</li>
           </ul>
-        </div>
+        </li>
+      </ol>
+      <div class="alert alert-tip">
+        <strong>🎁 추가 확인: Playground에서 모델 호출해보기</strong>
+        Bedrock 콘솔 좌측 메뉴 <strong>"Playgrounds → Chat / Text"</strong>로 들어가서, Claude 모델을 선택하고 "안녕"이라고 입력해보세요. 응답이 오면 모델 액세스가 잘 된 상태입니다.
+      </div>
+      <div class="success-criteria">
+        <strong>✅ 성공 기준</strong>
+        Claude와 Titan Embeddings 모델이 모두 "Access granted" 상태이면 성공입니다.
+      </div>
+      <a class="action-btn" href="https://console.aws.amazon.com/bedrock/" target="_blank">🚀 Bedrock 콘솔 열기</a>
+      <div class="check-row">
+        <button class="check-btn success" onclick="markStep(3, true)">✓ 잘 됐어요</button>
+        <button class="check-btn fail" onclick="markStep(3, false)">✗ 막혔어요</button>
+      </div>
+      <div class="alert alert-warning" style="display:none;" id="step3-fail">
+        <strong>💡 막혔다면?</strong>
+        ① 모델 상태가 "Request access"로 떠있다면, 교육 담당자에게 "Model access 승인 요청 부탁드린다"고 알려주세요. 승인까지 몇 시간 ~ 1일 걸릴 수 있어요.<br>
+        ② Bedrock 페이지 자체가 안 열린다면, 오른쪽 리전을 교육 지정 리전으로 변경했는지 확인하세요. 한국 리전(ap-northeast-2)에서는 Bedrock이 제공되지 않을 수 있어요.
       </div>
     </div>
+  </section>
 
-    <!-- STEP 4 -->
-    <div class="step-card">
+  <!-- STEP 4 -->
+  <section>
+    <h2 class="section-title"><span class="num">4</span>Colab에서 Bedrock API 호출 테스트</h2>
+    <p class="section-desc">가장 중요한 단계입니다. <strong>Colab 노트북에서 Bedrock에 코드로 접속</strong>되는지 확인합니다.</p>
+
+    <div class="step" id="step4">
       <div class="step-header">
-        <div class="step-number">04</div>
-        <div class="step-title">
-          <h3>Bedrock 모델 목록 조회</h3>
-          <div class="step-success">모델 ID 목록이 화면에 10개 이상 출력</div>
-        </div>
+        <h3>🧪 패키지 설치 → 자격증명 → API 호출까지 한 번에</h3>
+        <span class="estimate">⏱ 5분</span>
       </div>
-      <div class="step-body">
-        <pre data-lang="python"><code>bedrock = boto3.<span class="tk-fn">client</span>(<span class="tk-str">'bedrock'</span>, region_name=<span class="tk-str">'us-east-1'</span>)
-resp = bedrock.<span class="tk-fn">list_foundation_models</span>()
-<span class="tk-key">for</span> m <span class="tk-key">in</span> resp[<span class="tk-str">'modelSummaries'</span>][:<span class="tk-num">10</span>]:
-    <span class="tk-fn">print</span>(m[<span class="tk-str">'modelId'</span>])</code></pre>
-        <div class="checkpoint danger">
-          <div class="checkpoint-label">⛔ AccessDenied가 뜨면</div>
-          <p>전달받은 자격 증명에 Bedrock 권한이 빠져 있습니다. 운영팀에 권한 확인을 요청하세요.</p>
-        </div>
-      </div>
-    </div>
+      <p class="description">아래 코드를 차례대로 Colab의 코드 셀에 복사해서 실행해 주세요. 교육 담당자가 안내한 <strong>임시 AWS 자격증명</strong>(Access Key, Secret Key, Session Token)을 사용합니다.</p>
 
-    <!-- STEP 5 -->
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-number">05</div>
-        <div class="step-title">
-          <h3>텍스트 모델 호출 (Claude)</h3>
-          <div class="step-success">Claude가 한국어 응답을 반환</div>
-        </div>
+      <p style="margin-top:14px;"><strong>① 필요한 패키지 설치</strong> (코드 셀 1)</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">복사</button>
+        <pre>!pip install -q boto3 botocore</pre>
       </div>
-      <div class="step-body">
-        <pre data-lang="python"><code><span class="tk-key">import</span> json
-runtime = boto3.<span class="tk-fn">client</span>(<span class="tk-str">'bedrock-runtime'</span>, region_name=<span class="tk-str">'us-east-1'</span>)
 
-body = json.<span class="tk-fn">dumps</span>({
-    <span class="tk-str">"anthropic_version"</span>: <span class="tk-str">"bedrock-2023-05-31"</span>,
-    <span class="tk-str">"max_tokens"</span>: <span class="tk-num">100</span>,
-    <span class="tk-str">"messages"</span>: [{<span class="tk-str">"role"</span>: <span class="tk-str">"user"</span>,
-                  <span class="tk-str">"content"</span>: <span class="tk-str">"한국어로 '안녕'이라고만 답해줘"</span>}]
-})
-resp = runtime.<span class="tk-fn">invoke_model</span>(
-    modelId=<span class="tk-str">'anthropic.claude-3-haiku-20240307-v1:0'</span>,
-    body=body
+      <p style="margin-top:14px;"><strong>② AWS 자격증명 설정</strong> (코드 셀 2) — 따옴표 안에 본인 키 입력</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">복사</button>
+        <pre>import os
+os.environ['AWS_ACCESS_KEY_ID'] = '교육담당자가-알려준-Access-Key'
+os.environ['AWS_SECRET_ACCESS_KEY'] = '교육담당자가-알려준-Secret-Key'
+os.environ['AWS_SESSION_TOKEN'] = '교육담당자가-알려준-Session-Token'
+os.environ['AWS_DEFAULT_REGION'] = 'us-east-1'  # 교육 지정 리전으로 변경</pre>
+      </div>
+
+      <p style="margin-top:14px;"><strong>③ Bedrock 모델 목록 조회</strong> (코드 셀 3) — 가장 쉬운 확인 방법</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">복사</button>
+        <pre>import boto3
+client = boto3.client('bedrock')
+models = client.list_foundation_models()
+print(f"사용 가능한 모델 개수: {len(models['modelSummaries'])}")
+print("첫 번째 모델:", models['modelSummaries'][0]['modelId'])</pre>
+      </div>
+
+      <p style="margin-top:14px;"><strong>④ Claude에게 진짜로 질문 던져보기</strong> (코드 셀 4)</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">복사</button>
+        <pre>import json
+runtime = boto3.client('bedrock-runtime')
+
+response = runtime.invoke_model(
+    modelId='anthropic.claude-3-haiku-20240307-v1:0',
+    body=json.dumps({
+        "anthropic_version": "bedrock-2023-05-31",
+        "max_tokens": 100,
+        "messages": [{"role": "user", "content": "안녕! 한 문장으로 자기소개 해줘"}]
+    })
 )
-<span class="tk-fn">print</span>(json.<span class="tk-fn">loads</span>(resp[<span class="tk-str">'body'</span>].<span class="tk-fn">read</span>())[<span class="tk-str">'content'</span>][<span class="tk-num">0</span>][<span class="tk-str">'text'</span>])</code></pre>
-        <div class="checkpoint danger">
-          <div class="checkpoint-label">⛔ AccessDeniedException이 뜨면</div>
-          <p>해당 리전에서 <strong>Claude 모델 액세스가 승인되지 않은 상태</strong>입니다. 운영팀에 "Bedrock 콘솔 → Model access에서 Claude Haiku 승인 확인 부탁드립니다"라고 회신해 주세요.</p>
-        </div>
+result = json.loads(response['body'].read())
+print(result['content'][0]['text'])</pre>
+      </div>
+
+      <div class="success-criteria">
+        <strong>✅ 성공 기준</strong>
+        ③에서 모델 개수가 출력되고, ④에서 Claude가 자기소개 문장으로 응답하면 성공입니다.
+      </div>
+      <div class="check-row">
+        <button class="check-btn success" onclick="markStep(4, true)">✓ 잘 됐어요</button>
+        <button class="check-btn fail" onclick="markStep(4, false)">✗ 막혔어요</button>
+      </div>
+      <div class="alert alert-warning" style="display:none;" id="step4-fail">
+        <strong>💡 막혔다면?</strong>
+        에러 메시지의 첫 줄을 그대로 복사해서 챗봇에 붙여넣어 보세요. 자주 나오는 에러는 아래 FAQ에도 정리되어 있어요.
+        대표 케이스: <code>AccessDeniedException</code>, <code>UnrecognizedClientException</code>, <code>ValidationException</code>, <code>EndpointConnectionError</code>
       </div>
     </div>
+  </section>
 
-    <!-- STEP 6 -->
-    <div class="step-card">
+  <!-- STEP 5 -->
+  <section>
+    <h2 class="section-title"><span class="num">5</span>외부 도메인 접속 확인 (패키지 다운로드)</h2>
+    <p class="section-desc">교육 중에 PyPI(파이썬 패키지 저장소)와 GitHub(예제 코드)에서 파일을 받아옵니다. 사내 망에서 차단되지 않는지 미리 확인합니다.</p>
+
+    <div class="step" id="step5">
       <div class="step-header">
-        <div class="step-number">06</div>
-        <div class="step-title">
-          <h3>Titan Embeddings 호출</h3>
-          <div class="step-success">벡터 차원 1536 출력</div>
-        </div>
+        <h3>📦 PyPI에서 패키지 설치 + GitHub에서 파일 받기</h3>
+        <span class="estimate">⏱ 2분</span>
       </div>
-      <div class="step-body">
-        <pre data-lang="python"><code>body = json.<span class="tk-fn">dumps</span>({<span class="tk-str">"inputText"</span>: <span class="tk-str">"한국어 임베딩 테스트 문장"</span>})
-resp = runtime.<span class="tk-fn">invoke_model</span>(
-    modelId=<span class="tk-str">'amazon.titan-embed-text-v1'</span>,
-    body=body
-)
-vec = json.<span class="tk-fn">loads</span>(resp[<span class="tk-str">'body'</span>].<span class="tk-fn">read</span>())[<span class="tk-str">'embedding'</span>]
-<span class="tk-fn">print</span>(<span class="tk-str">f"벡터 차원: {</span><span class="tk-fn">len</span>(vec)<span class="tk-str">}"</span>)</code></pre>
-      </div>
-    </div>
+      <p class="description">Colab에서 아래 두 명령어를 실행했을 때 오류가 안 나면 OK입니다.</p>
 
-    <!-- STEP 7 -->
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-number">07</div>
-        <div class="step-title">
-          <h3>샘플 PDF 업로드 및 chunk 분할</h3>
-          <div class="step-success">"페이지: N, 청크: M" 형식으로 출력</div>
-        </div>
+      <p style="margin-top:14px;"><strong>① PyPI 접속 테스트</strong> (실제 교육에서 쓰는 패키지들)</p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">복사</button>
+        <pre>!pip install -q langchain langchain-aws pypdf faiss-cpu streamlit python-dotenv</pre>
       </div>
-      <div class="step-body">
-        <p>Colab 왼쪽 사이드바 → 폴더 아이콘 → 업로드 버튼으로 <strong>아무 PDF(5~20페이지 권장)</strong>를 업로드한 뒤 아래 코드 실행:</p>
-        <pre data-lang="python"><code><span class="tk-key">from</span> langchain_community.document_loaders <span class="tk-key">import</span> PyPDFLoader
-<span class="tk-key">from</span> langchain.text_splitter <span class="tk-key">import</span> RecursiveCharacterTextSplitter
 
-loader = <span class="tk-fn">PyPDFLoader</span>(<span class="tk-str">"/content/sample.pdf"</span>)   <span class="tk-com"># 업로드한 파일명으로 변경</span>
-docs = loader.<span class="tk-fn">load</span>()
-splitter = <span class="tk-fn">RecursiveCharacterTextSplitter</span>(chunk_size=<span class="tk-num">500</span>, chunk_overlap=<span class="tk-num">50</span>)
-chunks = splitter.<span class="tk-fn">split_documents</span>(docs)
-<span class="tk-fn">print</span>(<span class="tk-str">f"페이지: {</span><span class="tk-fn">len</span>(docs)<span class="tk-str">}, 청크: {</span><span class="tk-fn">len</span>(chunks)<span class="tk-str">}"</span>)</code></pre>
-        <div class="checkpoint danger">
-          <div class="checkpoint-label">⛔ 주의 — 회사 기밀 문서 업로드 금지</div>
-          <p>Colab은 Google 외부 서비스입니다. 테스트용으로는 공개 자료(공공기관 보고서 PDF, 위키 문서 등)를 사용하세요. 청크가 <code>0</code>으로 출력되면 스캔 이미지 기반 PDF입니다 — 텍스트 PDF로 교체.</p>
-        </div>
+      <p style="margin-top:14px;"><strong>② GitHub raw 접속 테스트</strong></p>
+      <div class="code-block">
+        <button class="copy-btn" onclick="copyCode(this)">복사</button>
+        <pre>!wget -q https://raw.githubusercontent.com/python/cpython/main/README.rst -O test.rst && echo "GitHub 접속 OK"</pre>
       </div>
-    </div>
 
-    <!-- STEP 8 -->
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-number">08</div>
-        <div class="step-title">
-          <h3>FAISS 검색</h3>
-          <div class="step-success">관련 청크가 top-3로 출력</div>
-        </div>
-      </div>
-      <div class="step-body">
-        <pre data-lang="python"><code><span class="tk-key">from</span> langchain_aws <span class="tk-key">import</span> BedrockEmbeddings
-<span class="tk-key">from</span> langchain_community.vectorstores <span class="tk-key">import</span> FAISS
-
-embeddings = <span class="tk-fn">BedrockEmbeddings</span>(
-    client=runtime,
-    model_id=<span class="tk-str">'amazon.titan-embed-text-v1'</span>
-)
-db = FAISS.<span class="tk-fn">from_documents</span>(chunks, embeddings)
-results = db.<span class="tk-fn">similarity_search</span>(<span class="tk-str">"이 문서의 핵심 내용은?"</span>, k=<span class="tk-num">3</span>)
-<span class="tk-key">for</span> i, r <span class="tk-key">in</span> <span class="tk-fn">enumerate</span>(results):
-    <span class="tk-fn">print</span>(<span class="tk-str">f"--- top {i+1} ---\n{r.page_content[:150]}\n"</span>)</code></pre>
-      </div>
-    </div>
-
-    <!-- STEP 9 -->
-    <div class="step-card">
-      <div class="step-header">
-        <div class="step-number">09</div>
-        <div class="step-title">
-          <h3>Streamlit 미리보기 (선택)</h3>
-          <div class="step-success">화면 표시 또는 차단 여부 확인</div>
-        </div>
-      </div>
-      <div class="step-body">
-        <p>본 단계는 <strong>선택 사항</strong>입니다. 차단되어도 교육 자체는 진행되지만, UI 실습이 코드/스크린샷 중심으로 대체됩니다.</p>
-        <pre data-lang="bash"><code>!npm install -g localtunnel
-!streamlit run app.py &>/dev/null &
-!npx localtunnel --port 8501</code></pre>
-        <div class="checkpoint">
-          <div class="checkpoint-label">⚠ 차단되면</div>
-          <p>고객사 보안 정책상 흔히 차단되는 영역입니다. 차단되었다면 <strong>완료 보고 양식의 9번 항목에 "차단됨"</strong>이라고만 기재해 주시면 됩니다.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ TROUBLESHOOT ═══════════ -->
-<section id="troubleshoot">
-  <div class="container">
-    <div class="section-num">04 — TROUBLESHOOTING</div>
-    <h2>자주 발생하는 <span class="italic">오류</span></h2>
-
-    <div class="table-wrap">
+      <p style="margin-top:18px;"><strong>참고: 네트워크에서 열려 있어야 하는 도메인 목록</strong></p>
       <table>
         <thead>
-          <tr>
-            <th style="width: 36%;">오류 메시지 / 증상</th>
-            <th style="width: 32%;">원인</th>
-            <th>대응</th>
-          </tr>
+          <tr><th>서비스</th><th>도메인</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td><code>InvalidClientTokenId</code></td>
-            <td>Access Key 복사 시 공백/줄바꿈</td>
-            <td>다시 복사해 붙여넣기</td>
-          </tr>
-          <tr>
-            <td><code>ExpiredToken</code></td>
-            <td>임시 자격 증명 만료</td>
-            <td>운영팀에 재발급 요청</td>
-          </tr>
-          <tr>
-            <td><code>AccessDeniedException</code> (Step 5)</td>
-            <td>해당 리전에 모델 액세스 미승인</td>
-            <td>운영팀에 Model access 승인 요청</td>
-          </tr>
-          <tr>
-            <td><code>ValidationException: invalid model</code></td>
-            <td>리전에 해당 모델 없음</td>
-            <td>운영팀이 지정한 리전 재확인</td>
-          </tr>
-          <tr>
-            <td><code>pip install</code> 무한 대기</td>
-            <td>사내망 PyPI 차단</td>
-            <td>네트워크 표 사내 IT팀 전달</td>
-          </tr>
-          <tr>
-            <td>Colab 접속 자체 불가</td>
-            <td>회사망 Colab 차단</td>
-            <td>네트워크 표 사내 IT팀 전달</td>
-          </tr>
-          <tr>
-            <td>PDF 청크가 0개</td>
-            <td>스캔 이미지 기반 PDF</td>
-            <td>텍스트 PDF로 교체</td>
-          </tr>
-          <tr>
-            <td>Streamlit URL 접속 불가</td>
-            <td>터널링 도메인 차단</td>
-            <td>선택 단계이므로 "차단됨" 기재</td>
-          </tr>
+          <tr><td>Google Colab</td><td><code>colab.research.google.com</code></td></tr>
+          <tr><td>AWS Console</td><td><code>console.aws.amazon.com</code></td></tr>
+          <tr><td>Bedrock API</td><td><code>bedrock-runtime.&lt;region&gt;.amazonaws.com</code></td></tr>
+          <tr><td>STS (임시자격증명)</td><td><code>sts.amazonaws.com</code></td></tr>
+          <tr><td>PyPI</td><td><code>pypi.org</code>, <code>files.pythonhosted.org</code></td></tr>
+          <tr><td>GitHub</td><td><code>github.com</code>, <code>raw.githubusercontent.com</code></td></tr>
         </tbody>
       </table>
+
+      <div class="success-criteria">
+        <strong>✅ 성공 기준</strong>
+        두 명령어가 모두 빨간 에러 없이 완료되면 성공입니다.
+      </div>
+      <div class="check-row">
+        <button class="check-btn success" onclick="markStep(5, true)">✓ 잘 됐어요</button>
+        <button class="check-btn fail" onclick="markStep(5, false)">✗ 막혔어요</button>
+      </div>
+      <div class="alert alert-warning" style="display:none;" id="step5-fail">
+        <strong>💡 막혔다면?</strong>
+        Colab은 구글 서버에서 실행되므로 보통 PyPI/GitHub 접속이 됩니다. 만약 실패하면 <code>"Could not find a version"</code> 또는 <code>"Connection refused"</code> 등의 메시지를 챗봇에 붙여넣어 보세요.
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════ SECURITY ═══════════ -->
-<section id="security">
-  <div class="container">
-    <div class="section-num">05 — SECURITY</div>
-    <h2>보안 <span class="italic">유의사항</span></h2>
+  <!-- 보안 유의사항 -->
+  <section>
+    <h2 class="section-title"><span class="num">!</span>꼭 지켜주실 보안 수칙</h2>
+    <p class="section-desc">교육은 외부 서비스(Google Colab)를 사용하므로, 아래 5가지를 꼭 지켜주세요.</p>
 
-    <div class="info-card">
-      <h4>반드시 지켜주세요</h4>
-      <ul>
-        <li><strong>회사 기밀·내부 문서를 Colab에 업로드하지 마세요.</strong> Colab은 Google 외부 서비스입니다. 테스트에는 공개 자료만 사용.</li>
-        <li><strong>AWS Access Key를 노트북 셀에 평문으로 남기고 공유하지 마세요.</strong> 노트북을 공유할 때는 자격 증명 셀의 출력을 지우거나 변수 셀을 삭제.</li>
-        <li><strong>전달받은 임시 자격 증명은 교육 종료 후 자동 폐기됩니다.</strong> 따로 어딘가에 저장해두지 마세요.</li>
-        <li><strong>모델 응답에 실제 사내 정보를 입력해 테스트하지 마세요.</strong> 테스트용으로는 "안녕"처럼 의미 없는 프롬프트만 사용.</li>
-      </ul>
+    <div class="alert alert-warning">
+      <strong>🛡 보안 수칙</strong>
+      ① 회사 기밀 문서는 Colab에 절대 업로드하지 마세요. 교육은 제공된 샘플 PDF로 진행합니다.<br>
+      ② AWS Access Key를 노트북 코드 셀에 직접 입력했다면, 교육 후 노트북을 공유하기 전에 반드시 키를 삭제해주세요.<br>
+      ③ 교육에서 발급받은 임시 자격증명은 <strong>교육 종료 후 폐기</strong>됩니다. 다른 작업에 재사용하지 마세요.<br>
+      ④ 노트북을 공유할 때 출력 셀에 계정 ID, 키 값, 내부 문서 내용이 남아있는지 확인하세요.<br>
+      ⑤ Streamlit 화면을 외부 URL로 띄우는 터널링 도구(ngrok 등)는 사내 정책상 차단될 수 있어요. 교육 중 별도 안내드립니다.
     </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <h2 class="section-title"><span class="num">?</span>자주 묻는 질문 (FAQ)</h2>
+    <p class="section-desc">막혔을 때 가장 자주 발생하는 케이스들입니다. 챗봇에도 같은 내용이 학습되어 있어요.</p>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q1. Colab 페이지가 아예 안 열려요</div>
+      <div class="faq-answer">사내 망에서 <code>colab.research.google.com</code>이 차단되어 있을 가능성이 가장 큽니다. 사내 IT 담당자에게 해당 도메인 방화벽 허용을 요청해 주세요. 임시로는 모바일 핫스팟이나 개인 와이파이로 우회해서 테스트해볼 수 있습니다.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q2. AWS 로그인 시 "잘못된 자격증명" 에러가 나요</div>
+      <div class="faq-answer">계정 ID(숫자 12자리), 사용자 이름, 비밀번호를 한 글자씩 다시 확인해 주세요. 특히 <strong>"루트 사용자"가 아닌 "IAM 사용자"</strong>로 로그인해야 합니다. 화면 상단의 토글을 확인해 주세요.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q3. Bedrock 콘솔에 들어가면 "Service not available in this region"이 떠요</div>
+      <div class="faq-answer">Bedrock은 <strong>일부 리전에서만 제공</strong>됩니다. 우측 상단 리전 선택에서 <strong>"US East (N. Virginia) us-east-1"</strong> 또는 <strong>"US West (Oregon) us-west-2"</strong>로 변경해 보세요. 교육 담당자가 안내한 리전을 사용하시면 됩니다.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q4. <code>AccessDeniedException</code> 에러가 나요</div>
+      <div class="faq-answer">권한이 부족해서 발생합니다. 확인할 점:<br>
+        ① Bedrock Console → Model access에서 해당 모델이 "Access granted" 상태인지<br>
+        ② IAM 사용자/역할에 <code>bedrock:InvokeModel</code>, <code>bedrock:ListFoundationModels</code> 권한이 있는지<br>
+        ③ 호출하는 리전과 모델 액세스 승인 리전이 같은지<br>
+        해결되지 않으면 챗봇에 에러 메시지 전문을 붙여넣어 주세요.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q5. <code>UnrecognizedClientException</code> 또는 <code>InvalidClientTokenId</code> 에러가 나요</div>
+      <div class="faq-answer">AWS 자격증명(Access Key, Secret Key)에 오타가 있거나, 임시 자격증명의 Session Token이 누락된 경우입니다. 교육 담당자가 전달한 키 3개(Access Key / Secret Key / Session Token)를 모두 복사해서 다시 넣어주세요. 또한 임시 자격증명은 만료 시간이 있어서, 시간이 지나면 새로 받아야 합니다.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q6. <code>pip install</code>이 사내에서는 안 돼요</div>
+      <div class="faq-answer">Colab은 구글 서버에서 실행되므로, 사내 망과 상관없이 보통 PyPI 접속이 잘 됩니다. <strong>로컬 PC에서 pip 명령어를 직접 실행하는 게 아니라, Colab 안에서 <code>!pip install</code> 을 실행</strong>하는 거예요. Colab 코드 셀에 <code>!pip install boto3</code>처럼 느낌표(!)를 붙여서 실행해 보세요.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q7. <code>list_foundation_models</code> 호출은 되는데, <code>invoke_model</code>은 실패해요</div>
+      <div class="faq-answer">모델 목록 조회 권한은 있지만, 실제 호출 권한이 없거나 모델 액세스가 승인되지 않은 상태입니다. Bedrock Console → Model access에서 <strong>호출하려는 모델 ID</strong>가 "Access granted"인지 확인해 주세요. 모델 ID는 정확히 일치해야 합니다 (예: <code>anthropic.claude-3-haiku-20240307-v1:0</code>).</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q8. 임시 자격증명이 "만료됐다"고 나와요</div>
+      <div class="faq-answer">교육용 임시 자격증명은 보통 몇 시간~하루 정도만 유효합니다. 만료되었다면 교육 담당자에게 새 자격증명을 요청해 주세요. 사전 테스트 후 시간이 지나서 교육 당일 다시 발급받아야 할 수 있습니다.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q9. 사전 테스트는 언제까지 해야 하나요?</div>
+      <div class="faq-answer">가능하면 <strong>교육 2~3 영업일 전</strong>까지 완료해 주세요. Bedrock Model access 승인이 즉시 안 될 수 있고, 사내 방화벽 허용 요청도 시간이 걸리기 때문입니다. 교육 전날까지 막힌 부분이 있다면 교육 담당자에게 미리 알려주세요.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">Q10. 막혔는데 회사 내 누구한테 도움 요청해야 하나요?</div>
+      <div class="faq-answer">
+        ① <strong>Colab/PyPI/GitHub 접속 차단</strong> → 사내 IT/네트워크 담당자에게 방화벽 허용 요청<br>
+        ② <strong>AWS 계정 로그인/MFA 이슈</strong> → 교육 담당자<br>
+        ③ <strong>Bedrock 모델 권한 이슈</strong> → 교육 담당자<br>
+        ④ <strong>코드 에러/사용법</strong> → 우측 하단 챗봇에 먼저 물어보고, 안 풀리면 교육 담당자
+      </div>
+    </div>
+  </section>
+
+  <div style="background: linear-gradient(135deg, #FFF7E6, #FFE8C2); border-radius: 14px; padding: 24px 28px; margin: 40px 0; text-align: center;">
+    <h3 style="color: var(--secondary); margin-bottom: 8px;">🎯 5개 항목 모두 ✓ 했다면 준비 완료!</h3>
+    <p style="color: var(--text-sub); font-size: 14.5px;">교육 당일 매끄럽게 진행될 수 있도록 도와주셔서 감사합니다.<br>막힌 부분이 있다면 챗봇이나 교육 담당자에게 알려주세요.</p>
   </div>
-</section>
 
-<!-- ═══════════ REPORT ═══════════ -->
-<section id="report">
-  <div class="container">
-    <div class="section-num">06 — COMPLETION REPORT</div>
-    <h2>완료 보고 <span class="italic">양식</span></h2>
-    <p class="section-lead">
-      9단계를 진행한 뒤, 아래 양식을 복사해 운영 담당자에게 회신해 주세요.
-      전부 성공이든 일부 막힘이 있든, 운영팀이 사전에 환경을 파악하면 교육 당일 더 매끄럽게 실습을 진행할 수 있습니다.
-    </p>
-
-    <div class="report-block"><span class="field">[CJONS Bedrock 사전 점검 결과]</span>
-─────────────────────────────────
-<span class="field">소속 / 이름:</span>     <span class="placeholder">○○팀 / 홍길동</span>
-<span class="field">테스트 일시:</span>     <span class="placeholder">2026-05-1X</span>
-<span class="field">테스트 네트워크:</span> <span class="placeholder">사무실 유선망 / 사내 Wi-Fi</span>
-<span class="field">사용 리전:</span>       <span class="placeholder">us-east-1</span>
-─────────────────────────────────
-1. Colab 접속              [ 성공 / 실패 ]
-2. pip install             [ 성공 / 실패 ]
-3. AWS 자격 증명           [ 성공 / 실패 ]
-4. 모델 목록 조회          [ 성공 / 실패 ]
-5. Claude 호출             [ 성공 / 실패 ]
-6. Titan Embeddings        [ 성공 / 실패 ]
-7. PDF chunk 분할          [ 성공 / 실패 ]
-8. FAISS 검색              [ 성공 / 실패 ]
-9. Streamlit (선택)        [ 성공 / 차단 / 미수행 ]
-─────────────────────────────────
-<span class="field">실패한 단계의 에러 메시지:</span>
-  <span class="placeholder">(예: Step 5에서 AccessDeniedException 발생)</span>
-
-<span class="field">기타 특이사항:</span>
-  <span class="placeholder">(없으면 "없음")</span>
 </div>
 
-    <div class="checkpoint success">
-      <div class="checkpoint-label">✓ 회신 권장 일정</div>
-      <p><strong>2026년 5월 14일(목) 18:00</strong>까지 운영 담당자에게 회신 부탁드립니다.<br>이후에 회신해 주셔도 괜찮지만, 일정이 촉박한 경우 당일 환경 보완이 어려울 수 있습니다.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════ FOOTER ═══════════ -->
 <footer>
-  <div class="container">
-    <div class="ornament">§</div>
-    <p>CJONS Bedrock 과정 — 사전 환경 자가 점검 가이드</p>
-    <p>본 문서는 2026년 5월 19일 교육 참여 대상자에게 배포됩니다.</p>
-    <div class="sig">— END OF DOCUMENT —</div>
-  </div>
+  <p><strong>CJ ONS Bedrock 교육 사전 환경 테스트 안내</strong></p>
+  <p>2026년 5월 19일 교육 · 작성일 2026년 5월 13일</p>
+  <p style="margin-top: 8px;">문의: 교육 담당자에게 연락주세요</p>
 </footer>
 
+<!-- Chatbot -->
+<button class="chat-fab" onclick="toggleChat()" title="도움 챗봇">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+</button>
+
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="info">
+      <div class="avatar">B</div>
+      <div>
+        <div class="title">Bedrock 도우미</div>
+        <div class="status">사전 테스트 도와드려요</div>
+      </div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">×</button>
+  </div>
+  <div class="chat-messages" id="chatMessages"></div>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="질문을 입력하세요... (예: AccessDenied)" onkeydown="if(event.key==='Enter') sendMsg()">
+    <button onclick="sendMsg()" id="sendBtn">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
 <script>
-  function toggleCheck(li) {
-    li.classList.toggle('checked');
+  // ---------- 진행률 ----------
+  const stepStatus = {1: null, 2: null, 3: null, 4: null, 5: null};
+
+  function markStep(num, success) {
+    stepStatus[num] = success;
+    const step = document.getElementById('step' + num);
+    const buttons = step.querySelectorAll('.check-btn');
+    buttons.forEach(b => b.classList.remove('active'));
+    if (success) {
+      step.classList.add('done');
+      buttons[0].classList.add('active');
+      document.getElementById('step' + num + '-fail').style.display = 'none';
+    } else {
+      step.classList.remove('done');
+      buttons[1].classList.add('active');
+      document.getElementById('step' + num + '-fail').style.display = 'block';
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const done = Object.values(stepStatus).filter(v => v === true).length;
+    const pct = (done / 5) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = done + ' / 5 완료';
+  }
+
+  // ---------- 복사 ----------
+  function copyCode(btn) {
+    const code = btn.nextElementSibling.textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '복사됨!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+    });
+  }
+
+  // ---------- FAQ 토글 ----------
+  function toggleFaq(el) {
+    el.parentElement.classList.toggle('open');
+  }
+
+  // ---------- 챗봇 ----------
+  const chatWindow = document.getElementById('chatWindow');
+  const chatMessages = document.getElementById('chatMessages');
+  const chatInput = document.getElementById('chatInput');
+
+  let chatOpened = false;
+  function toggleChat() {
+    chatWindow.classList.toggle('open');
+    if (!chatOpened && chatWindow.classList.contains('open')) {
+      chatOpened = true;
+      showWelcome();
+    }
+  }
+
+  function showWelcome() {
+    addBot(
+      '안녕하세요! 👋 Bedrock 사전 환경 테스트 도우미예요.<br>막힌 부분이 있으면 편하게 물어보세요. 자주 묻는 항목은 아래 버튼을 눌러도 돼요.',
+      ['Colab 접속 안 됨', 'AWS 로그인 안 됨', 'Bedrock 모델 액세스', 'AccessDenied 에러', 'pip install 에러', '리전을 모르겠어요']
+    );
+  }
+
+  function addBot(html, quickReplies = []) {
+    const div = document.createElement('div');
+    div.className = 'chat-msg bot';
+    let inner = '<div class="chat-bubble">' + html + '</div>';
+    if (quickReplies.length) {
+      inner += '<div class="quick-replies">' + quickReplies.map(q => '<button class="quick-reply" onclick="quickReply(this)">' + q + '</button>').join('') + '</div>';
+    }
+    div.innerHTML = inner;
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function addUser(text) {
+    const div = document.createElement('div');
+    div.className = 'chat-msg user';
+    div.innerHTML = '<div class="chat-bubble">' + escapeHtml(text) + '</div>';
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'chat-msg bot';
+    div.id = 'typingIndicator';
+    div.innerHTML = '<div class="chat-bubble" style="padding:4px 8px;"><div class="typing"><span></span><span></span><span></span></div></div>';
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function hideTyping() {
+    const t = document.getElementById('typingIndicator');
+    if (t) t.remove();
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
+  function quickReply(btn) {
+    chatInput.value = btn.textContent;
+    sendMsg();
+  }
+
+  function sendMsg() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    addUser(text);
+    chatInput.value = '';
+    document.querySelectorAll('.quick-replies').forEach(el => el.remove());
+    showTyping();
+    setTimeout(() => {
+      hideTyping();
+      const reply = findAnswer(text);
+      addBot(reply.text, reply.quickReplies || []);
+    }, 500 + Math.random() * 400);
+  }
+
+  // ---------- 답변 DB ----------
+  const knowledgeBase = [
+    {
+      keywords: ['colab', '코랩', '안열', '안 열', '접속', '차단', '못들어'],
+      filter: (t) => /(colab|코랩)/i.test(t) && /(접속|차단|안열|안 열|못|들어|로딩)/i.test(t),
+      answer: '<strong>📔 Colab 접속이 안 되는 경우</strong><br><br>① 가장 흔한 원인: <strong>사내 망에서 <code>colab.research.google.com</code> 차단</strong><br>→ IT/네트워크 담당자에게 해당 도메인 허용 요청<br>→ 임시로 모바일 핫스팟으로 우회 가능<br><br>② Google 계정 로그인 이슈<br>→ 회사 계정으로 안 되면 개인 Gmail로 시도<br>→ 익명 모드(시크릿창)에서 로그인 후 접속<br><br>③ 페이지는 열리는데 새 노트북 만들기가 안 되면 → Google Drive 접속 권한도 함께 확인 (drive.google.com)',
+      quickReplies: ['그럼 무엇을 IT에 요청하나요?', '다른 단계로']
+    },
+    {
+      keywords: ['it', '담당자', '요청', '방화벽', '화이트리스트', '허용'],
+      filter: (t) => /(it|담당자|방화벽|허용|화이트리스트)/i.test(t),
+      answer: '<strong>🛡 IT/네트워크 담당자에게 요청할 항목</strong><br><br>사내 방화벽에서 아래 도메인 HTTPS(443) 아웃바운드 허용을 요청해 주세요:<br><br>• <code>colab.research.google.com</code><br>• <code>drive.google.com</code><br>• <code>console.aws.amazon.com</code><br>• <code>bedrock.*.amazonaws.com</code><br>• <code>bedrock-runtime.*.amazonaws.com</code><br>• <code>sts.amazonaws.com</code><br>• <code>pypi.org</code>, <code>files.pythonhosted.org</code><br>• <code>github.com</code>, <code>raw.githubusercontent.com</code><br><br>"CJ ONS Bedrock 사내 교육에서 사용하는 외부 서비스"라고 사유를 적으시면 됩니다.',
+      quickReplies: ['AWS 로그인 안 됨', 'AccessDenied 에러']
+    },
+    {
+      keywords: ['aws', '콘솔', '로그인', '안됨'],
+      filter: (t) => /(aws|콘솔|console)/i.test(t) && /(로그인|안됨|안 됨|못)/i.test(t),
+      answer: '<strong>🔐 AWS Console 로그인이 안 되는 경우</strong><br><br>① <strong>"IAM 사용자"로 로그인하는지 확인</strong><br>로그인 화면 상단에서 "루트 사용자"가 아닌 "IAM 사용자"를 선택해야 합니다.<br><br>② 입력 정보 확인<br>• 계정 ID: 12자리 숫자 (또는 별칭)<br>• 사용자 이름: 영문<br>• 비밀번호: 대소문자 구분<br><br>③ MFA 문제<br>• MFA 디바이스가 등록되어 있는지 사내 IT에 확인<br>• OTP는 30초마다 갱신되므로 새 코드로 시도<br><br>④ console.aws.amazon.com 자체가 차단된 경우 → 방화벽 허용 요청',
+      quickReplies: ['IT에 뭐 요청해요?', '리전 변경 방법']
+    },
+    {
+      keywords: ['리전', 'region'],
+      filter: (t) => /(리전|region)/i.test(t),
+      answer: '<strong>📍 리전(Region) 변경 방법</strong><br><br>① AWS Console에 로그인된 상태에서, <strong>우측 상단</strong>에 현재 리전명이 표시됩니다 (예: "Seoul" 또는 "Asia Pacific (Seoul)").<br><br>② 리전명을 클릭하면 드롭다운이 열립니다.<br><br>③ 교육 담당자가 안내한 리전 선택. 일반적으로:<br>• <strong>US East (N. Virginia) us-east-1</strong><br>• <strong>US West (Oregon) us-west-2</strong><br><br><strong>⚠ 주의:</strong> Bedrock은 한국 리전(ap-northeast-2)에서는 일부 모델만 지원하거나 미지원입니다. 반드시 교육 지정 리전을 사용하세요.',
+      quickReplies: ['Bedrock 모델 액세스']
+    },
+    {
+      keywords: ['model access', '모델 액세스', '모델액세스', '모델 권한', '승인'],
+      filter: (t) => /(모델|model)/i.test(t) && /(액세스|access|권한|승인|approval)/i.test(t),
+      answer: '<strong>🤖 Bedrock 모델 액세스 확인/요청</strong><br><br>① Bedrock 콘솔(<a href="https://console.aws.amazon.com/bedrock/" target="_blank">바로가기</a>) 접속<br><br>② 좌측 사이드바 하단 <strong>"Model access"</strong> 클릭<br><br>③ 모델 목록에서 다음 상태 확인:<br>• <strong>Access granted</strong> ✅ → 바로 사용 가능<br>• <strong>Available to request</strong> → "Request model access" 버튼 클릭하여 승인 요청<br>• <strong>In review</strong> → 승인 대기 중<br><br>④ 교육에서 사용하는 필수 모델:<br>• Anthropic Claude 계열 (Claude 3 Haiku 등)<br>• Amazon Titan Embeddings<br><br>승인이 안 되어 있으면 교육 담당자에게 빠르게 알려주세요. 보통 몇 분~수시간 소요됩니다.',
+      quickReplies: ['AccessDenied 에러', 'API 호출 안 됨']
+    },
+    {
+      keywords: ['accessdenied', 'access denied', '액세스 거부', '권한 없음', '권한없음'],
+      filter: (t) => /(accessdenied|액세스 거부|권한 없|권한없)/i.test(t),
+      answer: '<strong>🚫 AccessDeniedException 해결</strong><br><br>3가지를 차례로 확인해 주세요:<br><br><strong>1️⃣ 모델 액세스 승인 상태</strong><br>Bedrock Console → Model access → 사용 모델이 "Access granted"인지<br><br><strong>2️⃣ IAM 권한</strong><br>사용자에게 다음 액션이 허용되어야 합니다:<br><code>bedrock:InvokeModel</code><br><code>bedrock:InvokeModelWithResponseStream</code><br><code>bedrock:ListFoundationModels</code><br><code>bedrock:GetFoundationModel</code><br><br><strong>3️⃣ 리전 일치</strong><br>코드에서 지정한 리전(<code>AWS_DEFAULT_REGION</code>)과 모델 액세스 승인 리전이 같아야 합니다.<br><br>해결 안 되면 에러 메시지 전체를 복사해서 다시 보내주세요.',
+      quickReplies: ['모델 액세스 확인 방법', 'UnrecognizedClient 에러']
+    },
+    {
+      keywords: ['unrecognizedclient', 'invalidclienttokenid', 'invalid client', '자격증명', '키 만료'],
+      filter: (t) => /(unrecognizedclient|invalidclient|자격증명|invalid client|키 만료|만료)/i.test(t),
+      answer: '<strong>🔑 자격증명(Credential) 관련 에러</strong><br><br>대표적인 에러: <code>UnrecognizedClientException</code>, <code>InvalidClientTokenId</code>, <code>ExpiredToken</code><br><br><strong>확인 사항:</strong><br><br>① Access Key ID, Secret Access Key, <strong>Session Token까지 3개 모두</strong> 입력했는지<br>(교육용은 임시 자격증명이라 Session Token이 꼭 필요해요)<br><br>② 키 값에 앞뒤 공백/줄바꿈이 섞여 들어가지 않았는지<br><br>③ 임시 자격증명 <strong>유효기간 만료</strong> 여부<br>→ 교육 담당자에게 새 키 발급 요청<br><br>④ 환경변수 설정 후 boto3 client를 <strong>다시 생성</strong>했는지<br>(<code>os.environ</code> 설정 후 만든 client만 새 키를 인식합니다)',
+      quickReplies: ['새 키 발급은 어떻게?', '다른 에러']
+    },
+    {
+      keywords: ['pip', 'install', '패키지', '설치'],
+      filter: (t) => /(pip|패키지|설치|install)/i.test(t),
+      answer: '<strong>📦 pip install 관련</strong><br><br>① Colab에서는 명령어 앞에 <strong>느낌표(!)</strong>를 붙입니다:<br><code>!pip install boto3</code><br><br>② 사내 PC에서 직접 설치하는 게 아니라, <strong>Colab 노트북 안에서</strong> 실행해야 합니다 (Colab은 구글 서버에서 동작).<br><br>③ 자주 보이는 에러:<br>• <code>Could not find a version</code> → 패키지 이름 오타 확인<br>• <code>SSL: CERTIFICATE_VERIFY_FAILED</code> → 사내 프록시 이슈, IT 문의<br>• <code>Connection timed out</code> → PyPI 접속 차단, IT에 <code>pypi.org</code> 허용 요청<br><br>④ 설치 후에도 import 에러가 나면, 런타임 재시작 (메뉴: 런타임 → 런타임 다시 시작)',
+      quickReplies: ['GitHub 다운로드 안 됨']
+    },
+    {
+      keywords: ['github', '깃허브', 'wget', 'raw'],
+      filter: (t) => /(github|깃허브|wget|raw)/i.test(t),
+      answer: '<strong>🔗 GitHub 접속/다운로드 이슈</strong><br><br>교육에서 예제 코드를 받아올 때 사용하는 도메인:<br>• <code>github.com</code><br>• <code>raw.githubusercontent.com</code><br><br>접속이 안 되면:<br>① Colab 셀에서 <code>!curl -sI https://raw.githubusercontent.com</code> 실행해서 응답 확인<br>② 차단 시 사내 IT에 위 두 도메인 허용 요청<br>③ 대안: 교육 자료를 Google Drive에서 받아오는 방식으로 진행 가능 (교육 담당자에게 문의)',
+      quickReplies: ['Colab 접속 안 됨', '다른 질문']
+    },
+    {
+      keywords: ['endpoint', '엔드포인트', 'connection', '연결', '타임아웃', 'timeout'],
+      filter: (t) => /(endpoint|엔드포인트|connection|타임아웃|timeout|연결.*안|연결.*실패)/i.test(t),
+      answer: '<strong>🌐 Bedrock 엔드포인트 연결 실패</strong><br><br>대표 에러: <code>EndpointConnectionError</code>, <code>Could not connect to the endpoint URL</code><br><br>① 리전 확인: 사용 중인 리전에서 Bedrock이 제공되는지<br>예) us-east-1, us-west-2 ✅ / ap-northeast-2 일부 모델만 ⚠<br><br>② 엔드포인트 URL이 자동 생성되는데 리전 환경변수가 잘못된 경우<br><code>os.environ[\'AWS_DEFAULT_REGION\']</code> 확인<br><br>③ Colab에서는 보통 외부 통신이 잘 되지만, 일부 케이스에서 일시적 차단이 있을 수 있음 → 1~2분 후 재시도',
+      quickReplies: ['리전 변경', 'AccessDenied']
+    },
+    {
+      keywords: ['validation', '검증', '잘못된 요청', 'modelid'],
+      filter: (t) => /(validation|검증|modelid|모델 id|model id|잘못된)/i.test(t),
+      answer: '<strong>⚠ ValidationException 해결</strong><br><br>주로 모델 ID나 요청 본문 형식이 잘못된 경우입니다.<br><br>① 모델 ID는 정확히 일치해야 합니다. 예시:<br>• <code>anthropic.claude-3-haiku-20240307-v1:0</code><br>• <code>anthropic.claude-3-sonnet-20240229-v1:0</code><br>• <code>amazon.titan-embed-text-v2:0</code><br><br>② Claude 모델 호출 시 body에 <code>anthropic_version</code> 필드 필수<br><br>③ <code>max_tokens</code> 필드도 필수 (Claude의 경우)<br><br>가이드 STEP 4의 예제 코드를 그대로 복사해서 시도해 보세요.',
+      quickReplies: ['예제 코드 다시 보기']
+    },
+    {
+      keywords: ['mfa', '2단계', '인증', 'otp'],
+      filter: (t) => /(mfa|2단계|인증|otp)/i.test(t),
+      answer: '<strong>🔒 MFA(2단계 인증)</strong><br><br>① 사내에서 발급한 MFA 디바이스(앱) 사용<br>예: AWS Authenticator, Google Authenticator, Authy 등<br><br>② OTP 코드는 30초마다 갱신 → 곧 만료될 것 같으면 새 코드로 시도<br><br>③ MFA 디바이스가 등록되지 않은 상태라면 사내 IT 또는 AWS 담당자에게 등록 요청<br><br>④ 시간 동기화 이슈로 코드가 안 맞는 경우, 폰의 시간을 "자동 설정"으로 변경',
+      quickReplies: ['AWS 로그인 다른 이슈']
+    },
+    {
+      keywords: ['streamlit'],
+      filter: (t) => /streamlit/i.test(t),
+      answer: '<strong>🖼 Streamlit UI 실습</strong><br><br>Streamlit은 파이썬으로 웹 UI를 만드는 도구예요. Colab에서 Streamlit 화면을 보려면 외부 URL로 터널링해야 하는데, 이게 <strong>사내 정책상 차단될 수 있어요</strong>.<br><br>사전 테스트에서는 필수가 아닙니다. 차단되어 있다면 교육 담당자에게 알려주시고, 교육 당일에는 <strong>코드 실행 + 스크린샷 기반 대체 실습</strong>으로 진행됩니다.<br><br>"Streamlit 차단됨"이라고 체크 5번 항목에 메모만 남겨주세요.',
+      quickReplies: ['다른 질문']
+    },
+    {
+      keywords: ['언제', '기한', '데드라인', '며칠'],
+      filter: (t) => /(언제|기한|데드라인|며칠|기일|마감)/i.test(t),
+      answer: '<strong>📅 사전 테스트 권장 일정</strong><br><br>교육일: <strong>2026년 5월 19일</strong><br><br>가능하면 <strong>5월 14일(목) 까지</strong> 모든 항목 확인을 권장드려요.<br><br>이유:<br>① 사내 방화벽 허용 요청은 보통 1~2일 걸려요<br>② Bedrock 모델 액세스 승인도 즉시 안 될 수 있어요 (몇 시간~1일)<br>③ 임시 자격증명은 교육 당일 다시 받게 되더라도, 사전 동작 확인은 미리 해두는 게 안전해요<br><br>막힌 항목이 있다면 교육 담당자에게 미리 알려주세요.',
+      quickReplies: ['교육 담당자 누구?']
+    },
+    {
+      keywords: ['담당자', '문의', '연락', '누구'],
+      filter: (t) => /(담당자|문의|연락|누구|어디)/i.test(t),
+      answer: '<strong>👥 문의 채널 안내</strong><br><br>이슈 유형별로 연락 채널이 달라요:<br><br>🔧 <strong>사내 망/방화벽/Colab 차단</strong> → 사내 IT/네트워크 담당자<br>🔐 <strong>AWS 계정/MFA/Bedrock 모델 권한</strong> → 교육 담당자<br>💻 <strong>코드 에러/사용법</strong> → 우선 챗봇에게 물어보고, 안 풀리면 교육 담당자<br><br>교육 담당자 연락처는 본 안내를 받으신 이메일/메신저에 함께 안내되어 있어요. 확인이 어려우시면 본 자료를 보내준 사내 담당자에게 문의해 주세요.',
+      quickReplies: ['다른 질문']
+    },
+    {
+      keywords: ['예제', '코드', '복사'],
+      filter: (t) => /(예제|코드|복사|샘플)/i.test(t),
+      answer: '<strong>📋 STEP 4 예제 코드를 다시 안내드릴게요</strong><br><br><strong>① 패키지 설치</strong><br><code>!pip install -q boto3 botocore</code><br><br><strong>② 자격증명 설정</strong> (4개 모두 입력)<br><code>os.environ[\'AWS_ACCESS_KEY_ID\'] = \'...\'</code><br><code>os.environ[\'AWS_SECRET_ACCESS_KEY\'] = \'...\'</code><br><code>os.environ[\'AWS_SESSION_TOKEN\'] = \'...\'</code><br><code>os.environ[\'AWS_DEFAULT_REGION\'] = \'us-east-1\'</code><br><br><strong>③ 모델 목록 조회로 연결 확인</strong><br><code>boto3.client(\'bedrock\').list_foundation_models()</code><br><br><strong>④ 실제 모델 호출</strong><br>STEP 4 코드 박스의 ④번 코드 사용<br><br>STEP 4 섹션에서 코드 박스 우상단 "복사" 버튼으로 바로 복사할 수 있어요.',
+      quickReplies: ['ValidationException 에러']
+    },
+    {
+      keywords: ['새 키', '키 발급', '재발급', '만료'],
+      filter: (t) => /(새 키|키 발급|재발급|만료|expire)/i.test(t),
+      answer: '<strong>🔑 임시 자격증명 재발급</strong><br><br>교육용 임시 자격증명(Access Key + Secret Key + Session Token)은 보통 몇 시간~하루 정도만 유효해요.<br><br>만료되어 <code>ExpiredToken</code> 에러가 나면:<br>① 교육 담당자에게 "임시 자격증명 재발급 요청"<br>② 새로 받은 키 3개를 코드에 다시 입력<br>③ boto3 client를 재생성 (셀을 다시 실행)<br><br>교육 당일에는 새 자격증명을 별도로 받게 되므로, 사전 테스트 때 받은 키가 만료되는 건 정상이에요.',
+      quickReplies: ['다른 질문']
+    },
+    {
+      keywords: ['감사', '고마워', 'thank', '도움됐'],
+      filter: (t) => /(감사|고마|thank|도움됐|해결)/i.test(t),
+      answer: '도움이 되어 다행이에요! 🙌<br>다른 단계도 막히면 언제든 다시 불러주세요. 5월 19일 교육 때 매끄럽게 진행되길 응원합니다.',
+      quickReplies: []
+    }
+  ];
+
+  function findAnswer(text) {
+    const t = text.toLowerCase();
+    for (const entry of knowledgeBase) {
+      if (entry.filter && entry.filter(t)) {
+        return { text: entry.answer, quickReplies: entry.quickReplies };
+      }
+    }
+    // 키워드만으로 매칭
+    let bestScore = 0; let bestEntry = null;
+    for (const entry of knowledgeBase) {
+      const score = entry.keywords.filter(k => t.includes(k.toLowerCase())).length;
+      if (score > bestScore) { bestScore = score; bestEntry = entry; }
+    }
+    if (bestEntry && bestScore > 0) {
+      return { text: bestEntry.answer, quickReplies: bestEntry.quickReplies };
+    }
+    return {
+      text: '음, 정확한 답을 못 찾았어요 🤔<br>아래 자주 묻는 항목 중에 해당되는 게 있으신가요? 또는 발생한 에러 메시지의 첫 줄을 그대로 붙여넣어 주세요.<br><br>그래도 해결 안 되면 교육 담당자에게 문의 부탁드려요.',
+      quickReplies: ['Colab 접속 안 됨', 'AWS 로그인 안 됨', 'AccessDenied 에러', 'Bedrock 모델 액세스', 'pip install 에러', '교육 담당자 누구?']
+    };
   }
 </script>
 
